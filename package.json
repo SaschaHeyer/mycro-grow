@@ -1,0 +1,50 @@
+{
+  "name": "mycro-grow",
+  "version": "1.0.0",
+  "description": "Grow math for gourmet & functional mushroom farms — hydration, spawn ratio, biological-efficiency yield, batch economics, substrate recipes, and fruiting-condition data. The open-source engine behind usemycro.com.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "mycro-grow": "bin/cli.js"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "mushroom",
+    "mushroom-cultivation",
+    "mushroom-farming",
+    "mycology",
+    "gourmet-mushrooms",
+    "oyster-mushroom",
+    "biological-efficiency",
+    "substrate",
+    "spawn-ratio",
+    "calculator",
+    "agriculture",
+    "agtech"
+  ],
+  "homepage": "https://usemycro.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaschaHeyer/mycro-grow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SaschaHeyer/mycro-grow/issues"
+  },
+  "author": "Mycro (https://usemycro.com)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
