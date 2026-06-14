@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mushroom fruiting conditions — 14-species reference (temperature, humidity, CO₂, FAE, BE) · mycro-grow</title>
+<meta name="description" content="Open reference data for 14 gourmet &amp; functional mushroom species: colonization and fruiting temperature, humidity, CO₂, fresh-air exchange, time to fruit, and typical biological efficiency. The FRUITING_CONDITIONS dataset from the MIT-licensed mycro-grow library, also available as species.json.">
+<link rel="canonical" href="https://saschaheyer.github.io/mycro-grow/species.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mushroom fruiting conditions — 14-species reference (mycro-grow)">
+<meta property="og:description" content="Colonization &amp; fruiting temperature, humidity, CO₂, fresh-air, time-to-fruit and biological efficiency for 14 gourmet &amp; functional species. Open data (MIT) — also available as species.json.">
+<meta property="og:url" content="https://saschaheyer.github.io/mycro-grow/species.html">
+<meta property="og:image" content="https://usemycro.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Mushroom fruiting conditions for 14 gourmet & functional species",
+  "description": "Typical cultivation ranges for 14 gourmet and functional mushroom species: colonization temperature, fruiting temperature, relative humidity, CO₂ target, fresh-air-exchange need, time to fruit, and typical biological efficiency. Compiled from common cultivation practice; provided as starting points, not guarantees. The FRUITING_CONDITIONS dataset behind the mycro-grow library and the Mycro Fruiting Conditions cheat-sheet.",
+  "license": "https://opensource.org/licenses/MIT",
+  "creator": { "@type": "Organization", "name": "Mycro", "url": "https://usemycro.com" },
+  "isAccessibleForFree": true,
+  "keywords": ["mushroom cultivation", "fruiting conditions", "biological efficiency", "oyster mushroom", "lion's mane", "shiitake", "gourmet mushrooms", "functional mushrooms"],
+  "url": "https://saschaheyer.github.io/mycro-grow/species.html",
+  "sameAs": "https://usemycro.com/fruiting-conditions.html",
+  "distribution": [{
+    "@type": "DataDownload",
+    "encodingFormat": "application/json",
+    "contentUrl": "https://saschaheyer.github.io/mycro-grow/species.json"
+  }],
+  "variableMeasured": [
+    "colonization temperature (°C)", "fruiting temperature (°C)", "relative humidity",
+    "CO₂ target", "fresh-air exchange", "time to fruit", "biological efficiency"
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0e1411; --panel:#151d18; --line:#26332b; --ink:#e8efe9; --muted:#9db0a4;
+    --accent:#5fbf8f; --accent2:#8ad6ad; --code:#0a0f0c; --warn:#d8b25f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent2)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 80px}
+  .nav{padding:18px 0;border-bottom:1px solid var(--line);font:13px var(--mono);color:var(--muted)}
+  .nav a{color:var(--accent2);text-decoration:none}
+  header{padding:40px 0 26px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  h1{font-size:1.95rem;margin:0 0 8px;letter-spacing:-.5px}
+  .tag{color:var(--muted);font-size:1.04rem;margin:0 0 18px;max-width:760px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .badge{font:12px var(--mono);color:var(--muted);border:1px solid var(--line);
+    border-radius:999px;padding:4px 11px;background:var(--panel)}
+  h2{font-size:1.35rem;margin:42px 0 12px;letter-spacing:-.3px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  p{margin:12px 0}
+  code{font-family:var(--mono);font-size:.92em;background:var(--code);padding:2px 6px;border-radius:5px;color:var(--accent2)}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow:auto;margin:14px 0}
+  pre code{background:none;padding:0;color:var(--ink)}
+  .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:18px 0}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:860px}
+  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--panel);color:var(--accent2);position:sticky;top:0;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td:last-child,th:last-child{border-right:none}
+  .latin{color:var(--muted);font-style:italic;font-size:.85em}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:20px 0}
+  .cta{display:inline-block;background:var(--accent);color:#06120c;font-weight:650;
+    text-decoration:none;padding:10px 18px;border-radius:9px;margin:4px 8px 4px 0}
+  .cta.alt{background:transparent;color:var(--accent2);border:1px solid var(--accent)}
+  ul{padding-left:22px}
+  li{margin:6px 0}
+  footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="nav"><a href="https://saschaheyer.github.io/mycro-grow/">← mycro-grow docs</a> &nbsp;·&nbsp; species reference</div>
+
+<header>
+  <h1>🍄 Mushroom fruiting conditions — 14-species reference</h1>
+  <p class="tag">Colonization and fruiting temperature, humidity, CO₂, fresh-air exchange, time to
+  fruit, and typical biological efficiency for 14 gourmet &amp; functional mushroom species. This is
+  the <code>FRUITING_CONDITIONS</code> dataset from the MIT-licensed
+  <a href="https://github.com/SaschaHeyer/mycro-grow">mycro-grow</a> library — the same data behind
+  the interactive <a href="https://usemycro.com/fruiting-conditions.html">Fruiting Conditions
+  cheat-sheet</a> at usemycro.com.</p>
+  <div class="badges">
+    <span class="badge">14 species</span>
+    <span class="badge">MIT / open data</span>
+    <span class="badge">temps in °C</span>
+    <span class="badge">JSON download</span>
+  </div>
+  <p style="margin-top:18px">
+    <a class="cta" href="https://saschaheyer.github.io/mycro-grow/species.json">Download species.json</a>
+    <a class="cta alt" href="https://usemycro.com/fruiting-conditions.html">Interactive cheat-sheet (°C/°F)</a>
+  </p>
+</header>
+
+<p>These are <em>typical cultivation ranges</em> compiled from common practice — useful starting
+points for dialing in a fruiting room, not guarantees. Conditions interact: pushing CO₂, humidity
+and fresh-air together is what actually shapes a flush. For the why behind the yield column, see
+<a href="https://usemycro.com/guides/biological-efficiency.html">biological efficiency, explained</a>;
+to plan a specific batch, use the <a href="https://usemycro.com/calculator.html">Grow Calculator</a>.</p>
+
+<h2 id="table">The reference table</h2>
+<div class="scroll">
+<table>
+  <thead><tr>
+    <th>Species</th><th>Type</th><th>Difficulty</th><th>Colonize</th><th>Fruit</th>
+    <th>Humidity</th><th>CO₂</th><th>FAE</th><th>Time to fruit</th><th>Typical BE</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Blue Oyster</strong><br><span class="latin">Pleurotus ostreatus</span></td>
+      <td>Oyster</td>
+      <td>Beginner</td>
+      <td>21–27°C</td>
+      <td>10–21°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>10–14 days</td>
+      <td>75–100%+</td>
+    </tr>
+    <tr>
+      <td><strong>Pearl Oyster</strong><br><span class="latin">Pleurotus ostreatus</span></td>
+      <td>Oyster</td>
+      <td>Beginner</td>
+      <td>21–27°C</td>
+      <td>13–21°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>10–14 days</td>
+      <td>75–100%</td>
+    </tr>
+    <tr>
+      <td><strong>Pink Oyster</strong><br><span class="latin">Pleurotus djamor</span></td>
+      <td>Oyster</td>
+      <td>Beginner</td>
+      <td>24–30°C</td>
+      <td>18–30°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>10–14 days</td>
+      <td>65–90%</td>
+    </tr>
+    <tr>
+      <td><strong>Golden / Yellow Oyster</strong><br><span class="latin">Pleurotus citrinopileatus</span></td>
+      <td>Oyster</td>
+      <td>Beginner</td>
+      <td>24–30°C</td>
+      <td>21–30°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>10–14 days</td>
+      <td>65–90%</td>
+    </tr>
+    <tr>
+      <td><strong>King Oyster</strong><br><span class="latin">Pleurotus eryngii</span></td>
+      <td>Oyster</td>
+      <td>Intermediate</td>
+      <td>22–25°C</td>
+      <td>15–18°C</td>
+      <td>85–90%</td>
+      <td>500–800 ppm</td>
+      <td>Moderate</td>
+      <td>14–21 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Lion's Mane</strong><br><span class="latin">Hericium erinaceus</span></td>
+      <td>Wood-lover</td>
+      <td>Intermediate</td>
+      <td>21–24°C</td>
+      <td>18–24°C</td>
+      <td>90–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>10–14 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Shiitake</strong><br><span class="latin">Lentinula edodes</span></td>
+      <td>Wood-lover</td>
+      <td>Advanced</td>
+      <td>21–27°C</td>
+      <td>10–21°C</td>
+      <td>80–90%</td>
+      <td>&lt;1000 ppm</td>
+      <td>Moderate–high</td>
+      <td>35–70 days + browning</td>
+      <td>75–125%</td>
+    </tr>
+    <tr>
+      <td><strong>Chestnut</strong><br><span class="latin">Pholiota adiposa</span></td>
+      <td>Wood-lover</td>
+      <td>Intermediate</td>
+      <td>21–24°C</td>
+      <td>13–18°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>14–21 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Pioppino</strong><br><span class="latin">Cyclocybe aegerita</span></td>
+      <td>Wood-lover</td>
+      <td>Intermediate</td>
+      <td>24–27°C</td>
+      <td>15–21°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>14–21 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Nameko</strong><br><span class="latin">Pholiota microspora</span></td>
+      <td>Wood-lover</td>
+      <td>Intermediate</td>
+      <td>21–24°C</td>
+      <td>10–16°C</td>
+      <td>90–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>14–30 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Enoki</strong><br><span class="latin">Flammulina velutipes</span></td>
+      <td>Wood-lover</td>
+      <td>Advanced</td>
+      <td>21–24°C</td>
+      <td>8–13°C</td>
+      <td>80–90%</td>
+      <td>High (long-stem form)</td>
+      <td>Low (restricted)</td>
+      <td>14–21 days</td>
+      <td>50–75%</td>
+    </tr>
+    <tr>
+      <td><strong>Maitake (Hen of the Woods)</strong><br><span class="latin">Grifola frondosa</span></td>
+      <td>Wood-lover</td>
+      <td>Advanced</td>
+      <td>21–24°C</td>
+      <td>13–18°C</td>
+      <td>85–95%</td>
+      <td>&lt;800 ppm</td>
+      <td>High</td>
+      <td>30–60 days + initiation</td>
+      <td>~30–50%</td>
+    </tr>
+    <tr>
+      <td><strong>Reishi</strong><br><span class="latin">Ganoderma lingzhi</span></td>
+      <td>Medicinal</td>
+      <td>Intermediate</td>
+      <td>25–30°C</td>
+      <td>24–29°C</td>
+      <td>90–95%</td>
+      <td>High → antlers / Low → conks</td>
+      <td>Varies by form</td>
+      <td>14–21 days</td>
+      <td>~30–50%</td>
+    </tr>
+    <tr>
+      <td><strong>Turkey Tail</strong><br><span class="latin">Trametes versicolor</span></td>
+      <td>Medicinal</td>
+      <td>Beginner</td>
+      <td>24–27°C</td>
+      <td>18–24°C</td>
+      <td>85–95%</td>
+      <td>&lt;1000 ppm</td>
+      <td>High</td>
+      <td>14–30 days</td>
+      <td>medicinal — not weight-based</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="muted">FAE = fresh-air exchange. BE = biological efficiency (fresh yield as a percent of dry
+substrate mass). Temperatures in °C; the <a href="https://usemycro.com/fruiting-conditions.html">hosted
+cheat-sheet</a> adds a °C/°F toggle, search and a per-species grower tip.</p>
+
+<h2 id="data">Use the data</h2>
+<p>The full dataset — including each species' grouping, difficulty, and a practical grower note — is
+available as open JSON and from the library:</p>
+<pre><code># raw open data
+curl https://saschaheyer.github.io/mycro-grow/species.json
+
+# or from the library
+import { FRUITING_CONDITIONS, SPECIES_BE } from 'mycro-grow';
+FRUITING_CONDITIONS.length;        // 14
+FRUITING_CONDITIONS[0].fruitC;     // [10, 21]  (Blue Oyster, °C)</code></pre>
+<p>Licensed MIT — reuse it in your own grow-room dashboards, controllers, and tools. Please keep the
+attribution link to <a href="https://usemycro.com">usemycro.com</a> if you republish the table.</p>
+
+<h2 id="hosted">Plan and track a real grow</h2>
+<div class="card">
+  <p>This table tells you the targets; <a href="https://usemycro.com">Mycro</a> helps you hit them and
+  keep records. Everything below is free in any browser — no install, no sign-up:</p>
+  <ul>
+    <li><a href="https://usemycro.com/grow-log.html">Free Grow Log (batch tracker)</a> — log each
+      batch from inoculation → colonization → fruiting → harvest, with automatic biological efficiency,
+      days-in-stage, overdue-colonization flags and contamination rate.</li>
+    <li><a href="https://usemycro.com/calculator.html">Grow Calculator</a> — substrate, spawn, yield and profit per block.</li>
+    <li><a href="https://usemycro.com/substrate-calculator.html">Substrate Recipe Calculator</a> — scale any recipe to N blocks.</li>
+    <li><a href="https://usemycro.com/guides/oyster-mushroom-growing.html">Oyster mushroom growing guide</a> — the full beginner-to-grower walk-through.</li>
+    <li><a href="https://usemycro.com/guides/">All grower guides</a> — biological efficiency, spawn ratio, field capacity, contamination, going commercial.</li>
+    <li><a href="https://usemycro.com/alternatives/best-mushroom-grow-log-apps.html">Best mushroom grow log apps (2026)</a> — an honest buyer's guide to the ways growers track their grows.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Part of <a href="https://saschaheyer.github.io/mycro-grow/">mycro-grow</a> · the open-source engine
+  behind <a href="https://usemycro.com">usemycro.com</a> ·
+  <a href="https://github.com/SaschaHeyer/mycro-grow">source on GitHub</a> ·
+  <a href="https://github.com/SaschaHeyer/mycro-grow/issues">report an issue</a></p>
+</footer>
+
+</div>
+</body>
+</html>
