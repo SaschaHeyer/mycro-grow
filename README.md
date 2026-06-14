@@ -8,6 +8,8 @@ This is the open-source engine behind the free calculators at **[usemycro.com](h
 Everything here already runs client-side in those tools; this package makes the same math
 reusable in your own scripts, spreadsheets-replacements, and grow-ops automation.
 
+📖 **Docs & API reference:** **[saschaheyer.github.io/mycro-grow](https://saschaheyer.github.io/mycro-grow/)**
+
 ---
 
 ## Why

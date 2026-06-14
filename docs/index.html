@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mycro-grow — JavaScript mushroom grow-math library (hydration, spawn ratio, biological efficiency, substrate, economics)</title>
+<meta name="description" content="mycro-grow is a zero-dependency JavaScript library + CLI for gourmet & functional mushroom farms: substrate hydration, spawn ratio, biological-efficiency yield, batch economics, substrate recipes, and fruiting-condition data for 14 species. MIT licensed — the open-source engine behind usemycro.com.">
+<link rel="canonical" href="https://saschaheyer.github.io/mycro-grow/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mycro-grow — JavaScript mushroom grow-math library">
+<meta property="og:description" content="Zero-dependency JS library + CLI: hydration, spawn ratio, biological-efficiency yield, batch economics, substrate recipes, and 14-species fruiting data. The open-source engine behind usemycro.com.">
+<meta property="og:url" content="https://saschaheyer.github.io/mycro-grow/">
+<meta property="og:image" content="https://usemycro.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#0e1411; --panel:#151d18; --line:#26332b; --ink:#e8efe9; --muted:#9db0a4;
+    --accent:#5fbf8f; --accent2:#8ad6ad; --code:#0a0f0c; --warn:#d8b25f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent2)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+  header{padding:54px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  h1{font-size:2.1rem;margin:0 0 6px;letter-spacing:-.5px}
+  .tag{color:var(--muted);font-size:1.06rem;margin:0 0 20px;max-width:680px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .badge{font:12px var(--mono);color:var(--muted);border:1px solid var(--line);
+    border-radius:999px;padding:4px 11px;background:var(--panel)}
+  h2{font-size:1.4rem;margin:44px 0 12px;letter-spacing:-.3px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  h3{font-size:1.07rem;margin:26px 0 8px;font-family:var(--mono);color:var(--accent2)}
+  p{margin:12px 0}
+  code{font-family:var(--mono);font-size:.92em;background:var(--code);padding:2px 6px;border-radius:5px;color:var(--accent2)}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow:auto;margin:14px 0}
+  pre code{background:none;padding:0;color:var(--ink)}
+  table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.95rem}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--panel);color:var(--accent2)}
+  td code{font-size:.86em}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+  .cta{display:inline-block;background:var(--accent);color:#06120c;font-weight:650;
+    text-decoration:none;padding:10px 18px;border-radius:9px;margin:4px 8px 4px 0}
+  .cta.alt{background:transparent;color:var(--accent2);border:1px solid var(--accent)}
+  ul{padding-left:22px}
+  li{margin:5px 0}
+  footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🍄 mycro-grow</h1>
+  <p class="tag">Grow math for gourmet &amp; functional mushroom farms — substrate hydration,
+  spawn ratio, biological-efficiency yield, batch economics, substrate recipes, and
+  fruiting-condition data for 14 species. Zero dependencies, MIT licensed.</p>
+  <div class="badges">
+    <span class="badge">MIT</span>
+    <span class="badge">0 dependencies</span>
+    <span class="badge">ES modules + CLI</span>
+    <span class="badge">12 tests passing</span>
+    <span class="badge">Node ≥ 18</span>
+  </div>
+  <p style="margin-top:18px">
+    <a class="cta" href="https://github.com/SaschaHeyer/mycro-grow">View on GitHub</a>
+    <a class="cta alt" href="https://usemycro.com">Hosted tools at usemycro.com</a>
+  </p>
+</header>
+
+<p><strong>mycro-grow</strong> is the open-source engine behind the free calculators at
+<a href="https://usemycro.com">usemycro.com</a>. Everything here already runs client-side in those
+tools — this package makes the same tested math reusable in your own scripts, dashboards, and
+grow-ops automation. Small mushroom farms run these numbers by hand or in fragile spreadsheets;
+mycro-grow packages them as clean, tested functions so you stop re-deriving them.</p>
+
+<h2 id="install">Install</h2>
+<pre><code>npm install mycro-grow</code></pre>
+<p>Or just clone it — it's a handful of dependency-free ES modules.
+Source: <a href="https://github.com/SaschaHeyer/mycro-grow">github.com/SaschaHeyer/mycro-grow</a>.</p>
+
+<h2 id="quick-start">Quick start</h2>
+<pre><code>import { growPlan } from 'mycro-grow';
+
+// Plan a 100-block oyster batch: 5 (dry) per block, 60% moisture,
+// 20% spawn rate, 85% biological efficiency, with costs and a $8 sale price.
+const plan = growPlan({
+  dryPerBlock: 5, blocks: 100, moisture: 60, spawnRate: 20, be: 85,
+  costSub: 0.50, costSpawn: 1.00, extraPerBlock: 0.50, salePrice: 8,
+});
+
+plan.perBlock.spawnRatio;   // "1 : 5.0"
+plan.totals.yield;          // 425   (fresh, total batch)
+plan.economics.profit;      // 2850
+plan.economics.margin;      // 83.82 (%)</code></pre>
+<p class="muted">Units: the library is unit-agnostic but <em>internally consistent</em> — pass masses
+in one unit (kg or lb) and prices per that same unit (e.g. <code>$/lb</code>). Every returned mass
+is in that unit. The numbers above are the library's real output (verified by the test suite).</p>
+
+<h2 id="api">API reference</h2>
+<p>Import from the package root: <code>import { growPlan, substrateRecipe, yieldFromBE, hydration,
+spawn, economics, PRESETS, SPECIES_BE, FRUITING_CONDITIONS } from 'mycro-grow';</code></p>
+
+<table>
+  <thead><tr><th>Function</th><th>Signature → returns</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>hydration</code></td>
+      <td><code>(dryMass, moisturePct) → {water, hydrated, moisture}</code></td>
+      <td>Water to add to hit a target moisture (clamped 40–75%) and the resulting hydrated mass.</td>
+    </tr>
+    <tr>
+      <td><code>spawn</code></td>
+      <td><code>(hydratedMass, spawnRatePct) → {spawn, rate, ratio}</code></td>
+      <td>Grain spawn to add at a given rate, plus the human-readable ratio <code>"1 : N"</code>.</td>
+    </tr>
+    <tr>
+      <td><code>yieldFromBE</code></td>
+      <td><code>(dryMass, bePct) → number</code></td>
+      <td>Expected fresh yield from biological efficiency: <code>dry × (BE/100)</code>.</td>
+    </tr>
+    <tr>
+      <td><code>economics</code></td>
+      <td><code>({totalDry, totalSpawn, totalYield, blocks, costSub, costSpawn, extraPerBlock, salePrice}) → {totalCost, costPerBlock, revenue, profit, margin, costPerUnitYield}</code></td>
+      <td>Per-batch cost, revenue, profit and margin.</td>
+    </tr>
+    <tr>
+      <td><code>growPlan</code></td>
+      <td><code>({dryPerBlock, blocks, moisture?, spawnRate?, be?, …costs}) → {perBlock, totals, economics}</code></td>
+      <td>The full batch plan — hydration + spawn + yield + economics, per block and totalled. Mirrors the hosted <a href="https://usemycro.com/calculator.html">Grow Calculator</a>.</td>
+    </tr>
+    <tr>
+      <td><code>substrateRecipe</code></td>
+      <td><code>({preset?, basePerBlock, blocks, moisture?, pSaw?, pSoy?, pBran?, pGyp?, straw?}) → {perBlock, totals, ingredients, warnings}</code></td>
+      <td>Scale a substrate recipe to N blocks. Presets: <code>masters</code>, <code>suppsaw</code>, <code>soyhull</code>, <code>straw</code>. Mirrors the hosted <a href="https://usemycro.com/substrate-calculator.html">Substrate Recipe Calculator</a>.</td>
+    </tr>
+    <tr>
+      <td><code>SPECIES_BE</code></td>
+      <td><code>object</code></td>
+      <td>Typical biological-efficiency ranges for 9 common gourmet/functional species.</td>
+    </tr>
+    <tr>
+      <td><code>FRUITING_CONDITIONS</code></td>
+      <td><code>array (14 species)</code></td>
+      <td>Temperature, humidity, CO₂, fresh-air and light targets per species — the data behind the <a href="https://usemycro.com/fruiting-conditions.html">Fruiting Conditions cheat-sheet</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="example">Worked example (real output)</h2>
+<p>A 100-block oyster batch at 5 dry/block, 60% moisture, 20% spawn, 85% BE. These are the exact
+values <code>growPlan(...)</code> returns:</p>
+<table>
+  <thead><tr><th>Per block</th><th>Value</th><th>Batch total (×100)</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Dry substrate</td><td><code>5</code></td><td>Dry substrate</td><td><code>500</code></td></tr>
+    <tr><td>Water to add</td><td><code>7.5</code></td><td>Water</td><td><code>750</code></td></tr>
+    <tr><td>Hydrated mass</td><td><code>12.5</code></td><td>Hydrated</td><td><code>1250</code></td></tr>
+    <tr><td>Spawn to add</td><td><code>2.5</code> (1 : 5.0)</td><td>Spawn</td><td><code>250</code></td></tr>
+    <tr><td>Expected yield</td><td><code>4.25</code></td><td>Fresh yield</td><td><code>425</code></td></tr>
+  </tbody>
+</table>
+<p><strong>Economics:</strong> total cost <code>$550.00</code> ($5.50/block) · revenue
+<code>$3,400.00</code> · profit <code>$2,850.00</code> · margin <code>83.8%</code> ·
+cost per unit yield <code>$1.29</code>.</p>
+
+<h3>substrateRecipe — Masters Mix, 100 blocks</h3>
+<pre><code>substrateRecipe({ preset:'masters', basePerBlock:5, blocks:100, moisture:60 })
+
+ingredients:
+  Hardwood sawdust   2.5/block   250 total
+  Soy hull pellets   2.5/block   250 total
+  Gypsum            0.05/block     5 total
+  — total dry       5.05/block   505 total
+  water            ≈7.57/block  757.5 total  (to 60% moisture)</code></pre>
+
+<h2 id="cli">CLI</h2>
+<p>The package ships a <code>mycro-grow</code> binary — handy for quick farm math without writing code:</p>
+<pre><code>npx mycro-grow plan --dry 5 --blocks 100 --moisture 60 --spawn 20 --be 85 \
+  --cost-sub 0.50 --cost-spawn 1.00 --extra 0.50 --price 8
+
+npx mycro-grow substrate --preset masters --base 5 --blocks 100
+npx mycro-grow species            # biological-efficiency table</code></pre>
+
+<h2 id="hosted">The hosted app</h2>
+<div class="card">
+  <p>mycro-grow is the math engine. <a href="https://usemycro.com">Mycro</a> is the grow-operations
+  software for small gourmet &amp; functional mushroom farms built on top of it. If you'd rather not
+  write code, the same math runs free in your browser:</p>
+  <ul>
+    <li><a href="https://usemycro.com/grow-log.html">Free Grow Log (batch tracker)</a> — log batches
+      from inoculation → colonization → fruiting → harvest, with automatic biological efficiency,
+      days-in-stage, overdue-colonization flags and contamination rate. No sign-up.</li>
+    <li><a href="https://usemycro.com/calculator.html">Grow Calculator</a> — substrate, spawn, yield and profit per block.</li>
+    <li><a href="https://usemycro.com/substrate-calculator.html">Substrate Recipe Calculator</a> — scale any recipe to N blocks.</li>
+    <li><a href="https://usemycro.com/fruiting-conditions.html">Fruiting Conditions cheat-sheet</a> — 14-species targets.</li>
+    <li><a href="https://usemycro.com/guides/biological-efficiency.html">Biological efficiency, explained</a> — the formula behind <code>yieldFromBE</code>.</li>
+    <li><a href="https://usemycro.com/alternatives/best-mushroom-grow-log-apps.html">Best mushroom grow log apps (2026)</a> — honest buyer's guide.</li>
+  </ul>
+</div>
+
+<h2 id="license">License</h2>
+<p>MIT. Use it in commercial farms, spreadsheets-replacements, and your own tools freely.
+For legal culinary and functional/medicinal mushroom cultivation only.</p>
+
+<footer>
+  <p>mycro-grow · the open-source engine behind <a href="https://usemycro.com">usemycro.com</a> ·
+  <a href="https://github.com/SaschaHeyer/mycro-grow">source on GitHub</a> ·
+  <a href="https://github.com/SaschaHeyer/mycro-grow/issues">report an issue</a></p>
+</footer>
+
+</div>
+</body>
+</html>
